@@ -73,7 +73,7 @@ COPY --from=frontend-builder /build/frontend/dist /app/frontend-dist
 COPY baby_monitor/run.sh /usr/local/bin/baby-monitor-run
 RUN chmod 0755 /usr/local/bin/baby-monitor-run \
     && mkdir -p /data \
-    && chmod 0700 /data
+    && chmod 0777 /data
 
 LABEL io.hass.arch="${BUILD_ARCH}" \
       io.hass.description="Local-first baby monitor for Home Assistant" \
