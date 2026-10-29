@@ -4,7 +4,7 @@ slug: baby_monitor
 description: >-
   Local-first sleep tracking, cry alerts, camera snapshots, and optional AI
   labels for Home Assistant.
-url: https://github.com/victoriano/home-assistant-baby-monitor
+url: https://github.com/Mortyr92/home-assistant-baby-monitor-published
 arch:
   - aarch64
   - amd64
@@ -24,4 +24,4 @@ environment:
   BABY_MONITOR_RUNTIME: home_assistant_app
   BABY_MONITOR_DATA_DIR: /data
   BABY_MONITOR_FRONTEND_DIR: /app/frontend-dist
-image: ghcr.io/victoriano/home-assistant-baby-monitor
+image: ghcr.io/mortyr92/home-assistant-baby-monitor

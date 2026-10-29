@@ -11,7 +11,7 @@ permissions:
 env:
   ARCHITECTURES: '["amd64", "aarch64"]'
   IMAGE_NAME: home-assistant-baby-monitor
-  REGISTRY_PREFIX: ghcr.io/victoriano
+  REGISTRY_PREFIX: ghcr.io/mortyr92
 
 jobs:
   prepare:
@@ -93,7 +93,7 @@ jobs:
             io.hass.type=app
             io.hass.name=Baby Monitor
             io.hass.description=Local-first baby monitor for Home Assistant
-            io.hass.url=https://github.com/victoriano/home-assistant-baby-monitor
+            io.hass.url=https://github.com/Mortyr92/home-assistant-baby-monitor-published
           push: "true"
           version: ${{ needs.prepare.outputs.version }}
 
