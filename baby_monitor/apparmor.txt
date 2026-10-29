@@ -16,8 +16,11 @@ profile baby_monitor flags=(attach_disconnected,mediate_deleted) {
   /usr/bin/ffmpeg Cx -> ffmpeg,
   /usr/local/bin/baby-monitor-run rix,
   /usr/local/bin/python* rix,
+  /opt/venv/bin/python* rix,
 
   /app/** r,
+  /opt/venv/ r,
+  /opt/venv/** mr,
   /data/ rw,
   /data/** rwk,
   /tmp/ rw,
