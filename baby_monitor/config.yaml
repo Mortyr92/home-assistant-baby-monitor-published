@@ -24,4 +24,4 @@ environment:
   BABY_MONITOR_RUNTIME: home_assistant_app
   BABY_MONITOR_DATA_DIR: /data
   BABY_MONITOR_FRONTEND_DIR: /app/frontend-dist
-image: ghcr.io/mortyr92/home-assistant-baby-monitor
+image: ghcr.io/mortyr92/home-assistant-baby-monitor-published

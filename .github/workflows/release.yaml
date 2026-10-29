@@ -10,7 +10,7 @@ permissions:
 
 env:
   ARCHITECTURES: '["amd64", "aarch64"]'
-  IMAGE_NAME: home-assistant-baby-monitor
+  IMAGE_NAME: home-assistant-baby-monitor-published
   REGISTRY_PREFIX: ghcr.io/mortyr92
 
 jobs:
