@@ -4,6 +4,16 @@ All notable changes to this App are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.7] - 2026-10-31
+
+### Fixed
+
+- Home Assistant startup compatibility when `/data` is read-only: the app now
+  falls back to `/config/baby-monitor-data` for persistent storage and uses
+  `/tmp/baby-monitor-data` only as a last resort.
+- Home Assistant app mode now defaults `BABY_MONITOR_DATA_DIR` to
+  `/config/baby-monitor-data`.
+
 ## [0.4.6] - 2026-10-31
 
 ### Fixed

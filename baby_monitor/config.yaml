@@ -1,5 +1,5 @@
 name: Baby Monitor
-version: "0.4.6"
+version: "0.4.7"
 slug: baby_monitor
 description: >-
   Local-first sleep tracking, cry alerts, camera snapshots, and optional AI
@@ -22,6 +22,6 @@ ports_description:
   8099/tcp: Standalone web interface (Ingress is recommended)
 environment:
   BABY_MONITOR_RUNTIME: home_assistant_app
-  BABY_MONITOR_DATA_DIR: /data
+  BABY_MONITOR_DATA_DIR: /config/baby-monitor-data
   BABY_MONITOR_FRONTEND_DIR: /app/frontend-dist
 image: ghcr.io/mortyr92/{arch}-home-assistant-baby-monitor-published
