@@ -4,6 +4,14 @@ All notable changes to this App are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.6] - 2026-10-31
+
+### Fixed
+
+- Release packaging: synchronized `uv.lock` project version with `pyproject.toml`
+  so container builds with `uv --locked` can publish images for Home Assistant
+  updates.
+
 ## [0.4.5] - 2026-10-31
 
 ### Fixed
