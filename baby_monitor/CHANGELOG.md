@@ -4,6 +4,14 @@ All notable changes to this App are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.5] - 2026-10-31
+
+### Fixed
+
+- Prevent silent fallback to `/tmp` when the configured data directory is not
+  writable. The app now fails fast at startup so settings are not accidentally
+  written to ephemeral storage and lost after restarts.
+
 ## [0.4.0] - 2026-07-13
 
 ### Added
