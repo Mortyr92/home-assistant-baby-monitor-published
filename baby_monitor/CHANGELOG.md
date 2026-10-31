@@ -4,6 +4,17 @@ All notable changes to this App are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.8] - 2026-10-31
+
+### Fixed
+
+- Data directory detection now probes multiple candidate paths and picks the
+  first writable one (`$BABY_MONITOR_DATA_DIR`, `/data`,
+  `/config/baby-monitor-data`, `/addon_configs/baby_monitor`, then
+  `/tmp/baby-monitor-data`).
+- Restored Home Assistant app default `BABY_MONITOR_DATA_DIR` to `/data` and
+  improved fallback warnings.
+
 ## [0.4.7] - 2026-10-31
 
 ### Fixed

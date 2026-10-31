@@ -11,26 +11,37 @@ umask 077
 export BABY_MONITOR_DATA_DIR
 export BABY_MONITOR_FRONTEND_DIR
 
-if ! mkdir -p "${BABY_MONITOR_DATA_DIR}" 2>/dev/null || [ ! -w "${BABY_MONITOR_DATA_DIR}" ]; then
-  fallback_data_dir=/config/baby-monitor-data
-  if [ "${BABY_MONITOR_DATA_DIR}" != "${fallback_data_dir}" ] \
-    && mkdir -p "${fallback_data_dir}" 2>/dev/null \
-    && [ -w "${fallback_data_dir}" ]; then
-    echo "WARNING: BABY_MONITOR_DATA_DIR '${BABY_MONITOR_DATA_DIR}' is not writable. Falling back to '${fallback_data_dir}'." >&2
-    BABY_MONITOR_DATA_DIR="${fallback_data_dir}"
-    export BABY_MONITOR_DATA_DIR
-  else
-    fallback_data_dir=/tmp/baby-monitor-data
-    if mkdir -p "${fallback_data_dir}" 2>/dev/null && [ -w "${fallback_data_dir}" ]; then
-      echo "WARNING: No persistent data directory is writable. Falling back to '${fallback_data_dir}' (settings may be lost after restart)." >&2
-      BABY_MONITOR_DATA_DIR="${fallback_data_dir}"
-      export BABY_MONITOR_DATA_DIR
-    else
-      echo "ERROR: Neither '${BABY_MONITOR_DATA_DIR}', '/config/baby-monitor-data', nor '/tmp/baby-monitor-data' is writable." >&2
-      exit 1
-    fi
+resolved_data_dir=
+checked_dirs=
+for candidate in "${BABY_MONITOR_DATA_DIR}" /data /config/baby-monitor-data /addon_configs/baby_monitor /tmp/baby-monitor-data; do
+  [ -n "${candidate}" ] || continue
+  case " ${checked_dirs} " in
+    *" ${candidate} "*) continue ;;
+  esac
+  checked_dirs="${checked_dirs} ${candidate}"
+  if mkdir -p "${candidate}" 2>/dev/null \
+    && touch "${candidate}/.baby-monitor-write-test" 2>/dev/null; then
+    rm -f "${candidate}/.baby-monitor-write-test"
+    resolved_data_dir="${candidate}"
+    break
   fi
+done
+
+if [ -z "${resolved_data_dir}" ]; then
+  echo "ERROR: No writable data directory found. Tried:${checked_dirs}" >&2
+  exit 1
 fi
+
+if [ "${resolved_data_dir}" != "${BABY_MONITOR_DATA_DIR}" ]; then
+  echo "WARNING: BABY_MONITOR_DATA_DIR '${BABY_MONITOR_DATA_DIR}' is not writable. Falling back to '${resolved_data_dir}'." >&2
+fi
+
+if [ "${resolved_data_dir}" = "/tmp/baby-monitor-data" ]; then
+  echo "WARNING: Using temporary storage at '${resolved_data_dir}' (settings may be lost after restart)." >&2
+fi
+
+BABY_MONITOR_DATA_DIR="${resolved_data_dir}"
+export BABY_MONITOR_DATA_DIR
 
 exec python -m uvicorn baby_monitor.main:app \
   --host "${BABY_MONITOR_HOST}" \
